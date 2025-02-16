@@ -1,0 +1,10 @@
+---
+- name: Configure all production services
+  hosts: all
+  become: True
+  roles:
+    - qemu_agent
+    - dns_ddns
+    - authentik
+    - reverse_proxy
+    - nas

@@ -1,0 +1,9 @@
+$TTL    86400
+@       IN      SOA     ns1.{{ reverse_domain }}. admin.{{ reverse_domain }}. (
+                          2024010101 ; Serial (update as needed)
+                          3600       ; Refresh (1 hour)
+                          1800       ; Retry (30 minutes)
+                          604800     ; Expire (1 week)
+                          86400 )    ; Minimum (1 day)
+;
+@       IN      NS      ns1.{{ reverse_domain }}.

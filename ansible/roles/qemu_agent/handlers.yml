@@ -1,0 +1,5 @@
+---
+- name: Restart qemu-guest-agent
+  service:
+    name: qemu-guest-agent
+    state: restarted

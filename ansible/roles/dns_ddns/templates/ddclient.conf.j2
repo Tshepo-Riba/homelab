@@ -1,0 +1,7 @@
+protocol=bind
+use=web, web=checkip.dyndns.com
+server=localhost
+port=53
+login=ddns-updater
+password='{{ dns_tsig_secret }}'
+zone={{ reverse_domain }}

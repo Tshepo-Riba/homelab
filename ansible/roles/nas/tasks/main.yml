@@ -1,0 +1,6 @@
+---
+- name: Display NAS post-installation message
+  debug:
+    msg: >
+      OpenMediaVault installation must be completed via automated preseed/kickstart or manually.
+      After installation, configure storage pools, shares, RAID/ZFS, backup policies, and monitoring.

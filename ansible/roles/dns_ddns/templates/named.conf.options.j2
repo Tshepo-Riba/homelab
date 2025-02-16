@@ -1,0 +1,21 @@
+options {
+    directory "/var/cache/bind";
+    recursion no;
+    allow-query { localhost; };
+
+    querylog yes;
+    key "ddns-key" {
+        algorithm hmac-sha256;
+        secret "{{ dns_tsig_secret }}";
+    };
+    allow-update { key "ddns-key"; };
+
+    forwarders {
+        8.8.8.8;
+        8.8.4.4;
+    };
+
+    dnssec-validation auto;
+    auth-nxdomain no;
+    listen-on { any; };
+};

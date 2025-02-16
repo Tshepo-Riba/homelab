@@ -1,0 +1,15 @@
+---
+- name: Restart bind9
+  service:
+    name: bind9
+    state: restarted
+
+- name: Restart ddclient
+  service:
+    name: ddclient
+    state: restarted
+
+- name: Restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted

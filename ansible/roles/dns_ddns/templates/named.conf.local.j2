@@ -1,0 +1,5 @@
+zone "{{ reverse_domain }}" {
+    type master;
+    file "/etc/bind/db.{{ reverse_domain }}";
+    allow-update { key "ddns-key"; };
+};

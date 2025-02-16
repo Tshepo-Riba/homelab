@@ -1,0 +1,37 @@
+---
+- name: Update apt cache and install Docker and Docker Compose
+  apt:
+    name:
+      - docker.io
+      - docker-compose
+    state: present
+    update_cache: yes
+
+- name: Ensure Docker service is running and enabled
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Create Traefik configuration directory
+  file:
+    path: /opt/traefik
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Deploy Traefik Docker Compose file using Cloudflare DNS challenge with wildcard support
+  template:
+    src: traefik.yml.j2
+    dest: /opt/traefik/docker-compose.yml
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart Traefik
+
+- name: Start Traefik via Docker Compose
+  command: docker-compose up -d
+  args:
+    chdir: /opt/traefik

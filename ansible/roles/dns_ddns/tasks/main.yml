@@ -1,0 +1,48 @@
+---
+- name: Update apt cache and install production DNS packages
+  apt:
+    name:
+      - bind9
+      - ddclient
+    state: present
+    update_cache: yes
+
+- name: Deploy Bind9 configuration with TSIG for dynamic updates
+  template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+    owner: root
+    group: bind
+    mode: '0640'
+  notify:
+    - Restart bind9
+
+- name: Secure ddclient configuration for dynamic DNS updates
+  template:
+    src: ddclient.conf.j2
+    dest: /etc/ddclient.conf
+    owner: root
+    group: root
+    mode: '0600'
+  notify:
+    - Restart ddclient
+
+- name: Deploy local Bind9 zone configuration
+  template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+    owner: root
+    group: bind
+    mode: '0640'
+  notify:
+    - Restart bind9
+
+- name: Deploy DNS zone file for {{ reverse_domain }}
+  template:
+    src: db.zone.j2
+    dest: /etc/bind/db.{{ reverse_domain }}
+    owner: root
+    group: bind
+    mode: '0644'
+  notify:
+    - Restart bind9
