@@ -103,8 +103,6 @@ This project is licensed under the MIT License.
 Contact
 For questions or support, please contact **Tshepo Riba** at **tshepo@tsheporiba.co.za**.
 
----
-
 ## 6. Manual Steps Summary
 
 1. **pfSense Setup:**  
